@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img alt="Anota Tudo" title="Anota Tudo!" src=".github/wikidados.webp" width="200px" />
+    <img alt="WikiDados" title="Anota Tudo!" src=".github/wikidados.webp" width="200px" />
 </h1>
 
 <h2 align="center">
@@ -21,8 +21,8 @@
 
 Algumas imagens do projeto:
 <p align="center">
-  <img alt="Layout 1" src=".github/desktop-view.png" width="700px">
-  <img alt="Layout 2" src=".github/mobile-view.png" width="400">
+  <img alt="Layout 1" src=".github/desktop-view.png" width="800px">
+  <img alt="Layout 2" src=".github/mobile-view.png" width="300px">
 </p>
 
 ---
