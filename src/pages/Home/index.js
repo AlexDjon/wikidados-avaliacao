@@ -10,22 +10,32 @@ import './styles.css'
 export default function Home() {
   /* 
     Filter Options: Opções de filtro
+    * Página atual da listagem
+    * Limite de itens por listagem
+    * Total de páginas
   */
   const [ actualPage, setActualPage ] = useState(1)
   const [ limit, setLimit ] = useState(6)
+  const [ totalPages, setTotalPages ] = useState(1)
 
   /*
-    Request Data: Dados vindos da requisição
+    PrimordialData: Em base os dados responsaveis por guardar
+    as informações principais
+
+      * Data dos usuários: Banco de dados na memória
+      * View dos usuários: Dados dos usuários escolhidos para ser mostrados em tela
+      * Total de usuários: Muda na primeira sincronização e nas futuras adições/exclusões
+      * ID: Como se fosse uma chave primária do banco de dados
   */
-  const [ totalPages, setTotalPages ] = useState(1)
-  const [ totalUsers, setTotalUsers ] = useState(0)
-  const [ lastId, setLastId ] = useState(0)
   const [ usersData, setUsersData ] = useState([])
   const [ usersView, setUsersView ] = useState([])
+  const [ totalUsers, setTotalUsers ] = useState(0)
+  const [ lastId, setLastId ] = useState(0)
   
 
   /* 
-    Realiza a primeira consulta a camada de dados 
+    Realiza a primeira consulta a camada de dados
+    Retornando as primeiras informações e os usuários
   */  
   useEffect(() => {
     async function initialLoad() {
@@ -35,9 +45,9 @@ export default function Home() {
         setLastId(totalUsers)
         setUsersData(users)
   
-        const tempLimit = 6
-        setTotalPages((totalUsers / tempLimit).toFixed())
-        setLimit(tempLimit)
+        const temporaryLimit = 6
+        setTotalPages((totalUsers / temporaryLimit).toFixed())
+        setLimit(temporaryLimit)
       }
       catch {
         alert('Não foi possível carregar os dados iniciais')
@@ -48,13 +58,18 @@ export default function Home() {
   }, [])
 
   /*
-    * Sempre que mudar a quantidade de users ou o limit
+    * Estado de listagem
+    * Tem por função o ato de organizar a lista
+    * Mantendo a ordem da paginação, do limite e da pesquisa
   */
   useEffect(() => {
-    function alterFilter() {
+    /* 
+      * Trabalha na paginação
+    */
+    function changePagination() {
       const newTotalPages = Math.ceil(totalUsers / limit)
 
-      if(newTotalPages < 1 || newTotalPages == Infinity) {
+      if(newTotalPages < 1 || !isFinite(newTotalPages)) {
         setTotalPages(1)
       }
       else {
@@ -62,22 +77,30 @@ export default function Home() {
       }
       if(actualPage > totalPages) setActualPage(totalPages)
     }
-    alterFilter()
+    changePagination()
 
-    function changeView() {
+    /* 
+      * Recarrega a camada de vizualização
+        aplicando a regra de paginação 
+        e também o limite
+    */
+    async function changeView() {
+
       const initial = (limit * (actualPage-1))
       const end = (limit * actualPage)
+
       const newView = usersData.slice(initial, end)
 
-      setUsersView(newView)
+      await setUsersView(newView)
     }
     changeView()
   }, [totalUsers, limit, actualPage, totalPages, usersData])
 
+  
   /*
-    Criação de novos usuários na memória
+    Ação principal de criação de usuário
   */
-  function handleCreate(data) {
+  async function handleCreate(data) {
     try {
       /* 
         Id primária que não pode diminuir
@@ -85,18 +108,64 @@ export default function Home() {
       const user_id = lastId+1
       setLastId(user_id)
 
-      /*
-        Adiciona novo usuário
-      */
       const newUser = {id: user_id, ...data}
-      setUsersData([newUser, ...usersData])
-      
-      /* Muda o total de usuários */
-      setTotalUsers(totalUsers+1)    
+      await setUsersData([newUser, ...usersData])
+
+      await setTotalUsers(totalUsers+1)    
     }
     catch(err) {
       alert('Não foi possível cadastrar novo usuário')
     }
+  }
+
+
+  /* 
+    Ação principal de remoção
+    * Remove por índice da array dados
+  */
+  async function handleDelete(index) {
+    await setUsersData(usersData.filter((v, i) => i !== index))
+    setTotalUsers(totalUsers-1)
+  }
+
+
+  /*
+    Ação principal de editar
+    * Edita por indíce da array de dados
+  */
+  async function handleEdit(index, data) {
+    await setUsersData(usersData.map((atualData, atualIndex) => {
+      if(index === atualIndex) {
+        return data
+      }
+      else {
+        return atualData
+      }
+    }))
+  }
+
+  
+  /*
+    Ação de pesquisa que altera a camada de vizualização
+    mantendo a integridade da camada de usuários
+  */
+  async function handleSearch(val) {
+    const toFilter = (user, place) => {
+      const regex = new RegExp(val, "gi")
+      const filter = (user[place]).split(regex)
+
+      if(filter.length > 1) 
+        return true
+      else 
+        return false
+    }
+
+    const filteredUsersByName = await usersData.filter(user => toFilter(user, "first_name"))
+    const filteredUsersByLastName = await usersData.filter(user => toFilter(user, "last_name"))
+
+    await setLimit(totalUsers)
+
+    await setUsersView([...filteredUsersByName, ...filteredUsersByLastName])
   }
 
   return (
@@ -107,10 +176,12 @@ export default function Home() {
         page={actualPage} 
         setPage={setActualPage} 
         total={totalPages} 
-        setTotal={setTotalPages}
         count={totalUsers}
         limit={limit}
-        setLimit={setLimit} />
+        setLimit={setLimit}
+        remove={handleDelete}
+        edit={handleEdit}
+        search={handleSearch}/>
     </div>
   )
 }

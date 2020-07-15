@@ -1,0 +1,63 @@
+.create {
+  width: 300px;
+  padding: 15px 15px 25px;
+  border-radius: 7px;
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.create h3,
+.create h3 b {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 45px;
+  border-bottom: solid 2px #fff;
+  padding-bottom: 3px;
+  text-transform: uppercase;
+}
+.create h3 b {
+  border-bottom-color: #D62246;
+}
+.create input {
+  width: 90%;
+  height: 40px;
+  border-bottom: solid 1px #cecece;
+  padding: 5px 15px;
+  margin: 7px 0;
+  font-weight: 600;
+}
+.create button {
+  width: 90%;
+  height: 40px;
+  margin-top: 20px;
+  background-color: #D62246;
+  color: #dbdbdb;
+  border-radius: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.create button i {
+  font-size: 21px;
+  margin-right: 5px;
+}
+.create button:hover {
+  filter: brightness(115%);
+}
+
+@media (max-width: 800px) {
+  .create {
+    width: 90%;
+  }
+  .create button {
+    height: 50px;
+  }
+}

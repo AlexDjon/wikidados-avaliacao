@@ -1,0 +1,91 @@
+.list {
+  width: 900px;
+  padding: 15px;
+
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.list .filter {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter .change {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filter .change button {
+  width: 35px;
+  height: 35px;
+  background-color: #D62246;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+.filter .change button:nth-child(1) {
+  margin-right: 10px;
+}
+.filter .change button:nth-child(3) {
+  margin-left: 10px;
+}
+.filter .change button:hover {
+  filter: brightness(110%);
+}
+.filter .change label,
+.filter .change label b {
+  font-size: 18px;
+}
+.filter .change.limit button {
+  background-color: #cecece;
+  color: #fff;
+}
+.filter .change input {
+  height: 40px;
+  width: 240px;
+  padding: 5px 10px;
+  background: none;
+  border-bottom: solid 2px #cecece;
+  border-radius: 0 0 5px 5px;
+  font-weight: 600;
+}
+@media (max-width: 800px) {
+  .list {
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+  }  
+  .list .filter {
+    padding: 25px 0;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+  }
+  .filter .change.limit {
+    width: 50%;
+    order: 1;
+  }
+  .filter .change.page {
+    width: 50%;
+    order: 2;
+  }
+  .filter .change.search {
+    order: 3;
+  }
+  .filter .change label,
+  .filter .change label b {
+    font-size: 15px;
+  }
+  
+  .filter .change.search input {
+    width: 300px;
+    margin-top: 15px;
+  }
+}
