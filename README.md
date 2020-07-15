@@ -9,6 +9,7 @@
 <p align="center">
   <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#documentação">Documentação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#como-rodar">Como rodar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#projeto">Projeto</a>&nbsp;&nbsp;&nbsp;
 </p>
@@ -19,9 +20,9 @@
 ## Layout
 
 Algumas imagens do projeto:
-<p align="center" style="display: flex; justify-content: space-around;">
-  <img alt="Layout 1" src=".github/desktop-view.png" height="380px">
-  <img alt="Layout 2" src=".github/mobile-view.png" height="380px">
+<p align="center">
+  <img alt="Layout 1" src=".github/desktop-view.png" width="700px">
+  <img alt="Layout 2" src=".github/mobile-view.png" width="400">
 </p>
 
 ---
@@ -29,12 +30,12 @@ Algumas imagens do projeto:
 
 O Projeto é dividido em páginas e components, sendo a estrutura:<br>
 - **src**
-  - **pages**: Contém as páginas do projeto, no caso é uma apenas chamada Home
-    - **Home/index**: Arquivo principal do projeto, contendo as variáveis de estado
-    - **Home/components/**: Contém as partes do layout
-  - **services**:
-    - **Api & getFirstData**: Responsáveis por fazer a conexão com a camada de dados e retornar os mesmos
-  - **validation**:
+  - **pages**: Contém as páginas do projeto, no caso é uma apenas chamada Home<br><br>
+    - **Home/index**: Arquivo principal do projeto, contendo as variáveis de estado<br><br>
+    - **Home/components/**: Contém as partes do layout<br><br>
+  - **services**:<br><br>
+    - **Api & getFirstData**: Responsáveis por fazer a conexão com a camada de dados e retornar os mesmos<br><br>
+  - **validation**:<br><br>
     - **yup**: Responsável por trabalhar com os erros de validação
 
 ---
