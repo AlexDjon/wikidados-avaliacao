@@ -26,19 +26,6 @@ Algumas imagens do projeto:
 </p>
 
 ---
-## Documentação
-
-O Projeto é dividido em páginas e components, sendo a estrutura:<br>
-- **src**
-  - **pages**: Contém as páginas do projeto, no caso é uma apenas chamada Home<br><br>
-    - **Home/index**: Arquivo principal do projeto, contendo as variáveis de estado<br><br>
-    - **Home/components/**: Contém as partes do layout<br><br>
-  - **services**:<br><br>
-    - **Api & getFirstData**: Responsáveis por fazer a conexão com a camada de dados e retornar os mesmos<br><br>
-  - **validation**:<br><br>
-    - **yup**: Responsável por trabalhar com os erros de validação
-
----
 
 ## Tecnologias
 
@@ -51,6 +38,20 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Axios](https://github.com/axios/axios) para requisições
 - [Sweetalert2](https://sweetalert2.github.io/) para pop-ups
 - [Yup](https://github.com/jquense/yup) para validação de campos
+
+---
+
+## Documentação
+
+O Projeto é dividido em páginas e components, sendo a estrutura:<br>
+- **src**
+  - **pages**: Contém as páginas do projeto, no caso é uma apenas chamada Home<br><br>
+    - **Home/index**: Arquivo principal do projeto, contendo as variáveis de estado<br><br>
+    - **Home/components/**: Contém as partes do layout<br><br>
+  - **services**:<br><br>
+    - **Api & getFirstData**: Responsáveis por fazer a conexão com a camada de dados e retornar os mesmos<br><br>
+  - **validation**:<br><br>
+    - **yup**: Responsável por trabalhar com os erros de validação
 
 ---
 
